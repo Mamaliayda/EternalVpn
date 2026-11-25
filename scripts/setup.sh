@@ -43,10 +43,14 @@ download_verified "$LIBV2RAY_URL" "$LIBS/libv2ray.aar" "$LIBV2RAY_SHA256"
 
 # hev-socks5-tunnel AAR - fallback tun2socks path (used if Xray tunFd mode is unavailable).
 # Pinned + sha256 verified per Phase 2 rules.
+# NOTE: Not placed in app/libs by default because its minSdk may differ from our app;
+# keep it in third_party/ for fallback integration if tunFd mode fails on device.
+HEV_DIR="$ROOT/third_party/hev-socks5-tunnel"
+mkdir -p "$HEV_DIR"
 HEV_VERSION="${HEV_VERSION:-2.20.0}"
 HEV_URL="https://github.com/heiher/hev-socks5-tunnel/releases/download/${HEV_VERSION}/hev-socks5-tunnel.aar"
 HEV_SHA256="ae8a2e96b80b4eccccd037805a4bb4a278090c89dbcae8bc6fcb7634e9a255b9"
-download_verified "$HEV_URL" "$LIBS/hev-socks5-tunnel.aar" "$HEV_SHA256"
+download_verified "$HEV_URL" "$HEV_DIR/hev-socks5-tunnel.aar" "$HEV_SHA256"
 
 # Geo files for Iran routing (Phase 5).
 # Source: https://github.com/chocolate4u/Iran-v2ray-rules
@@ -59,4 +63,4 @@ GEOSITE_SHA256="7b8025038eacfe89b3bf8b4bee0c27d5769e6c78e276279cf09cb8118e503a2e
 download_verified "$GEOIP_URL" "$ASSETS/geoip.dat" "$GEOIP_SHA256"
 download_verified "$GEOSITE_URL" "$ASSETS/geosite.dat" "$GEOSITE_SHA256"
 
-echo "Done. Verified binaries are in app/libs and app/src/main/assets/geo (gitignored)."
+echo "Done. Verified binaries are in app/libs, third_party/hev-socks5-tunnel, and app/src/main/assets/geo (gitignored)."
