@@ -10,8 +10,8 @@ ASSETS="$ROOT/app/src/main/assets/geo"
 mkdir -p "$LIBS" "$ASSETS"
 
 # AndroidLibXrayLite (libv2ray AAR) - provides Xray-core for Android.
-# Pin a specific release; review API before bumping.
-LIBV2RAY_VERSION="${LIBV2RAY_VERSION:-v25.12.8}"
+# Pinned to verified latest (2026-11-25). Review API before bumping.
+LIBV2RAY_VERSION="${LIBV2RAY_VERSION:-v26.11.9}"
 LIBV2RAY_URL="https://github.com/2dust/AndroidLibXrayLite/releases/download/${LIBV2RAY_VERSION}/libv2ray.aar"
 
 echo "Downloading libv2ray ${LIBV2RAY_VERSION}..."

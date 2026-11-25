@@ -67,7 +67,7 @@ This downloads `libv2ray.aar` (AndroidLibXrayLite) into `app/libs/` and geo file
 | Gradle | 8.9 | Matches AGP 8.7.x |
 | Kotlin | 2.0.21 | Stable K2/Compose compiler plugin support |
 | compileSdk / targetSdk / minSdk | 35 / 34 / 24 | Plan targets minSdk 24, target 34; compileSdk 35 chosen for AGP 8.7.x compatibility (plan noted 36 - bump with AGP 8.9+) |
-| AndroidLibXrayLite (libv2ray) | v25.12.8 (pinned in setup script) | Stable pinned release; **verify latest API before Phase 2** and bump deliberately |
+| AndroidLibXrayLite (libv2ray) | v26.11.9 (pinned in setup script) | Latest verified release (2026-11-25); API verified from source in `docs/phase2-research.md` |
 | hev-socks5-tunnel | 2.x (source/build) | To be integrated in Phase 2; native build or prebuilt bundle required |
 
 > Note: Versions above are initial picks for the skeleton. Before Phase 2, re-check the latest stable
