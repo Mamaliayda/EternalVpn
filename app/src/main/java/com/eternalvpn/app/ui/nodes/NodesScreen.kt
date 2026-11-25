@@ -23,6 +23,7 @@ import com.eternalvpn.app.data.model.Node
 @Composable
 fun NodesScreen(vm: NodesViewModel = viewModel()) {
     val nodes by vm.nodes.collectAsState()
+    val selectedNodeId by vm.selectedNodeId.collectAsState()
     val clipboard = LocalClipboardManager.current
     val snackbarHostState = remember { SnackbarHostState() }
     var showQr by remember { mutableStateOf(false) }
@@ -86,7 +87,12 @@ fun NodesScreen(vm: NodesViewModel = viewModel()) {
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 items(nodes, key = { it.id }) { node ->
-                    NodeRow(node = node, onDelete = { vm.deleteNode(node.id) })
+                    NodeRow(
+                        node = node,
+                        selected = node.id == selectedNodeId,
+                        onSelect = { vm.selectNode(node.id) },
+                        onDelete = { vm.deleteNode(node.id) },
+                    )
                 }
             }
         }
@@ -94,14 +100,26 @@ fun NodesScreen(vm: NodesViewModel = viewModel()) {
 }
 
 @Composable
-private fun NodeRow(node: Node, onDelete: () -> Unit) {
-    ElevatedCard(modifier = Modifier.fillMaxWidth()) {
+private fun NodeRow(node: Node, selected: Boolean, onSelect: () -> Unit, onDelete: () -> Unit) {
+    ElevatedCard(
+        onClick = onSelect,
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = if (selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface
+        )
+    ) {
         Row(
             modifier = Modifier.padding(12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Column(modifier = Modifier.weight(1f)) {
-                Text(node.name, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text(
+                    node.name,
+                    style = MaterialTheme.typography.titleMedium,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    color = if (selected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface,
+                )
                 Spacer(Modifier.height(2.dp))
                 Text(
                     "${node.protocol.name.lowercase()} · ${node.address}:${node.port} · ${node.network.name.lowercase()}",

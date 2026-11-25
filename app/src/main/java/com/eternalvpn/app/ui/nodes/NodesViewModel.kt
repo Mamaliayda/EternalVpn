@@ -15,10 +15,15 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class NodesViewModel(app: Application) : AndroidViewModel(app) {
-    private val repo = NodeRepository((app as EternalVpnApp).database.nodeDao())
+    private val appRef = app as EternalVpnApp
+    private val repo = NodeRepository(appRef.database.nodeDao())
+    private val settings = appRef.settingsStore
 
     val nodes: StateFlow<List<Node>> = repo.observeNodes()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    val selectedNodeId: StateFlow<Long?> = settings.selectedNodeId
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
     private val _messages = MutableSharedFlow<String>(extraBufferCapacity = 8)
     val messages = _messages.asSharedFlow()
@@ -48,6 +53,13 @@ class NodesViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun deleteNode(id: Long) {
-        viewModelScope.launch { repo.delete(id) }
+        viewModelScope.launch {
+            repo.delete(id)
+            if (selectedNodeId.value == id) settings.setSelectedNodeId(null)
+        }
+    }
+
+    fun selectNode(id: Long) {
+        viewModelScope.launch { settings.setSelectedNodeId(id) }
     }
 }
