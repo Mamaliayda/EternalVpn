@@ -83,9 +83,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           tail -200 build-test.log > build-test-tail.log || true
-          BODY="$(printf 'CI build failed for %s
-
-```
-%s
-```' "${{ github.sha }}" "$(cat build-test-tail.log)")"
-          gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/comments" -f body="$BODY" || true
+          {
+            echo "CI build failed for ${{ github.sha }}"
+            echo
+            echo '```'
+            cat build-test-tail.log
+            echo '```'
+          } > build-test-comment.md
+          gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/comments" -F body=@build-test-comment.md || true
