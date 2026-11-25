@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">EternalVPN</string>
+    <string name="nav_home">خانه</string>
+    <string name="nav_nodes">نودها</string>
+    <string name="nav_scanner">اسکنر</string>
+    <string name="nav_routing">مسیریابی</string>
+    <string name="nav_settings">تنظیمات</string>
+    <string name="connect">اتصال</string>
+    <string name="disconnect">قطع اتصال</string>
+    <string name="connecting">در حال اتصال…</string>
+    <string name="connected">متصل</string>
+    <string name="disconnected">قطع</string>
+    <string name="import_clipboard">وارد کردن از کلیپ‌بورد</string>
+    <string name="import_qr">اسکن QR</string>
+    <string name="import_subscription">افزودن اشتراک</string>
+    <string name="test_all">تست همه</string>
+    <string name="update_all">به‌روزرسانی همه</string>
+    <string name="scan">اسکن</string>
+    <string name="cancel">لغو</string>
+    <string name="apply">اعمال</string>
+    <string name="save">ذخیره</string>
+    <string name="delete">حذف</string>
+    <string name="no_nodes">هنوز نودی اضافه نشده است</string>
+    <string name="subscription_url">آدرس اشتراک</string>
+    <string name="add">افزودن</string>
+    <string name="iran_routing">مسیریابی ایران</string>
+    <string name="iran_routing_desc">سایت‌های ایرانی مستقیم، بقیه از پروکسی</string>
+    <string name="split_tunnel">تقسیم تونل</string>
+    <string name="split_tunnel_desc">انتخاب برنامه‌هایی که از VPN عبور نکنند</string>
+    <string name="notification_channel_vpn">اتصال VPN</string>
+    <string name="notification_channel_vpn_desc">وضعیت اتصال VPN</string>
+    <string name="vpn_notification_title">EternalVPN</string>
+    <string name="vpn_notification_connected">متصل به %1$s</string>
+    <string name="vpn_notification_disconnected">قطع شده</string>
+    <string name="action_stop">قطع</string>
+</resources>

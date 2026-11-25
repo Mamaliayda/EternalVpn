@@ -1,0 +1,24 @@
+*.iml
+.gradle
+/local.properties
+/.idea/
+/.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+*.apk
+*.aab
+/app/build/
+/app/release/
+
+# Large binaries - managed via setup script / LFS
+*.aar
+*.so
+*.dat
+!gradle/wrapper/gradle-wrapper.jar
+
+# Keystore
+*.jks
+*.keystore
