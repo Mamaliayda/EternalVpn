@@ -15,8 +15,9 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
 
 class HomeViewModel(app: Application) : AndroidViewModel(app) {
-    private val settings = (app as EternalVpnApp).settingsStore
-    private val nodeDao = app.database.nodeDao()
+    private val appRef = app as EternalVpnApp
+    private val settings = appRef.settingsStore
+    private val nodeDao = appRef.database.nodeDao()
 
     val vpnState: StateFlow<VpnState> = XrayController.state
     val lastError: StateFlow<String?> = XrayController.lastError
