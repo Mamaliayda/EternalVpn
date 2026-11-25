@@ -24,6 +24,6 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
 
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     val selectedNode: StateFlow<Node?> = settings.selectedNodeId
-        .flatMapLatest { id -> if (id == null) flowOf(null) else flow { emit(nodeDao.getById(id)) } }
+        .flatMapLatest { id -> if (id == null) flowOf<Node?>(null) else flow<Node?> { emit(nodeDao.getById(id)) } }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 }
