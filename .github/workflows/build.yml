@@ -50,7 +50,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run unit tests
-        run: ./gradlew :app:testDebugUnitTest --stacktrace
+        run: ./gradlew :app:testDebugUnitTest --stacktrace 2>&1 | tee build-test.log; exit ${PIPESTATUS[0]}
 
       - name: Assemble debug APK
         run: ./gradlew :app:assembleDebug --stacktrace
@@ -69,6 +69,7 @@ jobs:
         with:
           name: unit-test-reports
           path: |
-            app/build/reports/tests/
+            build-test.log
+            app/build/reports/
             app/build/test-results/
           if-no-files-found: warn
