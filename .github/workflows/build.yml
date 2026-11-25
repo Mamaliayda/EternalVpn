@@ -82,12 +82,17 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          tail -200 build-test.log > build-test-tail.log || true
           {
             echo "CI build failed for ${{ github.sha }}"
             echo
+            echo "## Compile errors"
             echo '```'
-            cat build-test-tail.log
+            grep -n "e: " build-test.log | head -80 || true
+            echo '```'
+            echo
+            echo "## Log tail"
+            echo '```'
+            tail -120 build-test.log || true
             echo '```'
           } > build-test-comment.md
           gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/comments" -F body=@build-test-comment.md || true
